@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+FILES=(
+  README.md
+  LICENSE
+  CODE_OF_CONDUCT.md
+  CONTRIBUTING.md
+  SECURITY.md
+  CHANGELOG.md
+  ROADMAP.md
+  ARCHITECTURE.md
+  PULL_REQUEST_TEMPLATE.md
+  TIL.md
+  .gitignore
+  .gitattributes
+  .editorconfig
+  .env.example
+)
+
+shopt -s nullglob
+for dir in */; do
+  [[ -d "$dir" ]] || continue
+  echo "Initializing starter files in $dir"
+  for file in "${FILES[@]}"; do
+    target="${dir}${file}"
+    if [[ ! -e "$target" ]]; then
+      touch "$target"
+    fi
+  done
+done
